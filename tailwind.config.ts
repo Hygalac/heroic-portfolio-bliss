@@ -20,7 +20,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        mono: ['Space Mono', 'monospace'],
+        sans: ['IBM Plex Sans', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -73,12 +73,17 @@ export default {
           "50%": {
             "box-shadow": "0 0 25px 4px rgba(59, 130, 246, 0.5)"
           }
+        },
+        "connector-pulse": {
+          "0%, 100%": { opacity: "0.3" },
+          "50%": { opacity: "1" }
         }
       },
       animation: {
         "fade-in": "fade-in 0.8s ease-out forwards",
         float: "float 6s ease-in-out infinite",
-        "button-glow": "button-glow 3s ease-in-out infinite"
+        "button-glow": "button-glow 3s ease-in-out infinite",
+        "connector-pulse": "connector-pulse 2s ease-in-out infinite"
       },
     },
   },
