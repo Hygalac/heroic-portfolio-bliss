@@ -19,6 +19,9 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        mono: ['Space Mono', 'monospace'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -63,10 +66,19 @@ export default {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
         },
+        "button-glow": {
+          "0%, 100%": {
+            "box-shadow": "0 0 20px 2px rgba(59, 130, 246, 0.3)"
+          },
+          "50%": {
+            "box-shadow": "0 0 25px 4px rgba(59, 130, 246, 0.5)"
+          }
+        }
       },
       animation: {
         "fade-in": "fade-in 0.8s ease-out forwards",
         float: "float 6s ease-in-out infinite",
+        "button-glow": "button-glow 3s ease-in-out infinite"
       },
     },
   },

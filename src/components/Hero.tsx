@@ -26,23 +26,20 @@ const Hero = () => {
           {/* Text Content */}
           <div className={`space-y-6 ${isVisible ? 'opacity-100' : 'opacity-0'} transition-opacity duration-1000`}>
             <div className="space-y-2">
-              <h2 className="text-sm sm:text-base text-blue-200 tracking-wider animate-fade-in opacity-0" style={{ animationDelay: "0.2s" }}>
-                Welcome to my portfolio
-              </h2>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white animate-fade-in opacity-0" style={{ animationDelay: "0.4s" }}>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white font-mono animate-fade-in opacity-0" style={{ animationDelay: "0.4s" }}>
                 Abdifatah Osman
               </h1>
-              <p className="text-xl sm:text-2xl text-blue-100 animate-fade-in opacity-0" style={{ animationDelay: "0.6s" }}>
+              <p className="text-xl sm:text-2xl text-blue-100 font-mono animate-fade-in opacity-0" style={{ animationDelay: "0.6s" }}>
                 Systems Engineer | Mobile & Game Developer
               </p>
             </div>
             
-            <p className="text-lg text-gray-300 max-w-xl animate-fade-in opacity-0" style={{ animationDelay: "0.8s" }}>
+            <p className="text-lg text-gray-300 max-w-xl font-mono animate-fade-in opacity-0" style={{ animationDelay: "0.8s" }}>
               I design and code beautifully simple things, and I love what I do.
             </p>
             
             <button 
-              className="px-8 py-4 bg-blue-500 text-white rounded-lg transform transition-all duration-300 hover:scale-105 hover:bg-blue-600 animate-fade-in opacity-0 hover:shadow-lg" 
+              className="px-8 py-4 bg-blue-500 text-white rounded-lg font-mono transform transition-all duration-300 hover:scale-105 hover:bg-blue-600 animate-fade-in opacity-0 animate-button-glow" 
               style={{ animationDelay: "1s" }}
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             >
