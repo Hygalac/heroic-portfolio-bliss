@@ -148,38 +148,33 @@ const Skills: React.FC = () => {
     };
   }, []);
   
-  // Position skills
+  // Position skills with more spacing
   useEffect(() => {
     if (windowSize.width === 0 || windowSize.height === 0) return;
-    
-    const getRandomPosition = () => {
-      const padding = 50; // Ensure skills don't touch the edges
-      return {
-        x: Math.random() * (windowSize.width - 2 * padding) + padding,
-        y: Math.random() * (windowSize.height - 2 * padding) + padding,
-      };
-    };
     
     // Group skills by category for clustered positioning
     const categories = Array.from(new Set(skills.map(skill => skill.category)));
     const categoryPositions: Record<string, { x: number, y: number }> = {};
     
-    // Assign a center point for each category
+    // Assign a center point for each category with more spread
     categories.forEach((category, index) => {
       const angle = (index / categories.length) * 2 * Math.PI;
-      const radius = Math.min(windowSize.width, windowSize.height) * 0.3;
+      // Increased radius for more spacing between categories
+      const radius = Math.min(windowSize.width, windowSize.height) * 0.35;
       categoryPositions[category] = {
         x: windowSize.width / 2 + radius * Math.cos(angle),
         y: windowSize.height / 2 + radius * Math.sin(angle),
       };
     });
     
-    // Position skills around their category center
+    // Position skills around their category center with more spacing
     const updatedSkills = skills.map(skill => {
       const categoryCenter = categoryPositions[skill.category];
       const skillsInCategory = skills.filter(s => s.category === skill.category).length;
-      const angle = (skills.findIndex(s => s.id === skill.id) % skillsInCategory) / skillsInCategory * 2 * Math.PI;
-      const radius = 100;
+      const indexInCategory = skills.filter(s => s.category === skill.category).findIndex(s => s.id === skill.id);
+      const angle = (indexInCategory / skillsInCategory) * 2 * Math.PI;
+      // Increased radius for more spacing between skills within a category
+      const radius = 150;
       
       return {
         ...skill,
@@ -219,7 +214,7 @@ const Skills: React.FC = () => {
     <section id="skills" className="py-24 relative overflow-hidden">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold mb-16 text-center">
-          Skills & Tools - Neural Network Connection
+          Skills & Tools
         </h2>
         
         {/* Background animation */}
@@ -243,7 +238,7 @@ const Skills: React.FC = () => {
         {/* Neural network visualization */}
         <div 
           ref={networkRef} 
-          className="relative h-[600px] mx-auto mb-12 border border-blue-900/20 rounded-xl overflow-hidden bg-[#010F18] shadow-[0_0_30px_rgba(14,165,233,0.1)]"
+          className="relative h-[650px] mx-auto mb-12 border border-blue-900/20 rounded-xl overflow-hidden bg-[#010F18] shadow-[0_0_30px_rgba(14,165,233,0.1)]"
         >
           {/* Connection lines */}
           <svg className="absolute w-full h-full top-0 left-0 z-10 pointer-events-none">
@@ -333,7 +328,7 @@ const Skills: React.FC = () => {
                 className="absolute z-30 bg-blue-900/20 px-3 py-1 rounded-full text-xs font-bold text-blue-300 border border-blue-800/50"
                 style={{
                   left: avgX,
-                  top: avgY - 50,
+                  top: avgY - 70, // Moved category labels further from skills
                   transform: "translateX(-50%)",
                 }}
               >
