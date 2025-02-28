@@ -81,6 +81,14 @@ export default {
         "draw-line": {
           "0%": { height: "0%" },
           "100%": { height: "100%" }
+        },
+        pulse: {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.5" }
+        },
+        breathe: {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.05)" }
         }
       },
       animation: {
@@ -88,7 +96,9 @@ export default {
         float: "float 6s ease-in-out infinite",
         "button-glow": "button-glow 3s ease-in-out infinite",
         "connector-pulse": "connector-pulse 2s ease-in-out infinite",
-        "draw-line": "draw-line 1.5s ease-out forwards"
+        "draw-line": "draw-line 1.5s ease-out forwards",
+        pulse: "pulse 2s ease-in-out infinite",
+        breathe: "breathe 3s ease-in-out infinite"
       },
     },
   },
