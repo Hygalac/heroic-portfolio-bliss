@@ -77,13 +77,18 @@ export default {
         "connector-pulse": {
           "0%, 100%": { opacity: "0.3" },
           "50%": { opacity: "1" }
+        },
+        "draw-line": {
+          "0%": { height: "0%" },
+          "100%": { height: "100%" }
         }
       },
       animation: {
         "fade-in": "fade-in 0.8s ease-out forwards",
         float: "float 6s ease-in-out infinite",
         "button-glow": "button-glow 3s ease-in-out infinite",
-        "connector-pulse": "connector-pulse 2s ease-in-out infinite"
+        "connector-pulse": "connector-pulse 2s ease-in-out infinite",
+        "draw-line": "draw-line 1.5s ease-out forwards"
       },
     },
   },
