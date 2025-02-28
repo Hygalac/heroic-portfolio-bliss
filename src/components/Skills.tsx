@@ -16,7 +16,9 @@ const Skills: React.FC = () => {
         <BackgroundAnimation />
         
         {/* Neural network visualization */}
-        <SkillNetwork skills={skillsData} />
+        <div className="max-w-5xl mx-auto px-4">
+          <SkillNetwork skills={skillsData} />
+        </div>
       </div>
     </section>
   );
