@@ -100,6 +100,9 @@ export default {
         pulse: "pulse 2s ease-in-out infinite",
         breathe: "breathe 3s ease-in-out infinite"
       },
+      boxShadow: {
+        glow: "0 0 15px rgba(59, 130, 246, 0.5)"
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],

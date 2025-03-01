@@ -13,7 +13,7 @@ const Skills: React.FC = () => {
         </h2>
         
         {/* Background animation */}
-        <BackgroundAnimation opacity={0.1} />
+        <BackgroundAnimation opacity={0.08} color="blue" density={20} />
         
         {/* Neural network visualization */}
         <SkillNetwork skills={skillsData} />
