@@ -34,14 +34,17 @@ export const useSkillPositioning = ({ skills: initialSkills, windowSize }: UseSk
       const skillsInCategory = initialSkills.filter(s => s.category === skill.category).length;
       const indexInCategory = initialSkills.filter(s => s.category === skill.category).findIndex(s => s.id === skill.id);
       const angle = (indexInCategory / skillsInCategory) * 2 * Math.PI;
-      // Increased radius for more spacing between skills within a category
-      const radius = 150;
+      
+      // Use elliptical distribution to add more horizontal spacing
+      // Horizontal radius is larger than vertical radius
+      const horizontalRadius = 200; // Increased from 150
+      const verticalRadius = 150;
       
       return {
         ...skill,
         position: {
-          x: categoryCenter.x + radius * Math.cos(angle),
-          y: categoryCenter.y + radius * Math.sin(angle),
+          x: categoryCenter.x + horizontalRadius * Math.cos(angle),
+          y: categoryCenter.y + verticalRadius * Math.sin(angle),
         },
       };
     });
