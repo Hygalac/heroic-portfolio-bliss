@@ -2,9 +2,13 @@
 import React from "react";
 import { CircuitBoard } from "lucide-react";
 
-const BackgroundAnimation: React.FC = () => {
+interface BackgroundAnimationProps {
+  opacity?: number;
+}
+
+const BackgroundAnimation: React.FC<BackgroundAnimationProps> = ({ opacity = 0.1 }) => {
   return (
-    <div className="absolute inset-0 opacity-10 pointer-events-none">
+    <div className="absolute inset-0 pointer-events-none" style={{ opacity }}>
       {Array.from({ length: 20 }).map((_, index) => (
         <CircuitBoard
           key={index}
