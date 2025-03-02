@@ -63,7 +63,7 @@ const Footer = () => {
             {/* Social icons */}
             <div className="flex space-x-4 mb-4">
               <a 
-                href="https://github.com" 
+                href="https://github.com/AbdifatahOsman2" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="p-2 transition-all duration-300 rounded-full hover:bg-blue-900/30 hover:scale-110 hover:shadow-[0_0_10px_rgba(59,130,246,0.5)]"
@@ -71,7 +71,7 @@ const Footer = () => {
                 <Github size={20} className="text-gray-300 hover:text-white" />
               </a>
               <a 
-                href="https://linkedin.com" 
+                href="https://www.linkedin.com/in/abdifatah-o-51552b180/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="p-2 transition-all duration-300 rounded-full hover:bg-blue-900/30 hover:scale-110 hover:shadow-[0_0_10px_rgba(59,130,246,0.5)]"

@@ -28,7 +28,15 @@ export const useSkillPositioning = ({ skills: initialSkills, windowSize }: UseSk
       };
     });
     
-    // Position skills around their category center with more spacing
+    // Custom position adjustments for specific nodes
+    const customPositions: Record<string, { x: number, y: number }> = {
+      "linux": { x: -80, y: 0 },     // Move Linux to the left
+      "react": { x: -70, y: 20 },    // Move React to the left
+      "wireshark": { x: 0, y: 50 },  // Move Wireshark down
+      "javascript": { x: 60, y: 0 }, // Move JavaScript to the right
+    };
+    
+    // Position skills around their category center with custom adjustments
     const updatedSkills = initialSkills.map(skill => {
       const categoryCenter = categoryPositions[skill.category];
       const skillsInCategory = initialSkills.filter(s => s.category === skill.category).length;
@@ -36,15 +44,24 @@ export const useSkillPositioning = ({ skills: initialSkills, windowSize }: UseSk
       const angle = (indexInCategory / skillsInCategory) * 2 * Math.PI;
       
       // Use elliptical distribution to add more horizontal spacing
-      // Horizontal radius is larger than vertical radius
-      const horizontalRadius = 200; // Increased from 150
+      const horizontalRadius = 200;
       const verticalRadius = 150;
+      
+      // Base positioning
+      let xPos = categoryCenter.x + horizontalRadius * Math.cos(angle);
+      let yPos = categoryCenter.y + verticalRadius * Math.sin(angle);
+      
+      // Apply custom position offsets if defined
+      if (customPositions[skill.id]) {
+        xPos += customPositions[skill.id].x;
+        yPos += customPositions[skill.id].y;
+      }
       
       return {
         ...skill,
         position: {
-          x: categoryCenter.x + horizontalRadius * Math.cos(angle),
-          y: categoryCenter.y + verticalRadius * Math.sin(angle),
+          x: xPos,
+          y: yPos,
         },
       };
     });
