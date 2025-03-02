@@ -1,39 +1,23 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import BackgroundAnimation from "@/components/skills/BackgroundAnimation";
 import { toast } from "@/hooks/use-toast";
 import { Mail, Github, Linkedin, BookOpen } from "lucide-react";
+import { useForm, ValidationError } from '@formspree/react';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [state, handleSubmit] = useForm("xbldnork");
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    // Simulate form submission
-    setTimeout(() => {
+  // Show toast on successful submission
+  React.useEffect(() => {
+    if (state.succeeded) {
       toast({
         title: "Message Sent!",
         description: "Thank you for reaching out. I'll get back to you soon.",
       });
-      setFormData({ name: "", email: "", message: "" });
-      setIsSubmitting(false);
-    }, 1500);
-  };
+    }
+  }, [state.succeeded]);
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden py-16 px-4">
@@ -79,7 +63,7 @@ const Contact = () => {
                 <Mail className="w-5 h-5" />
               </a>
               <a 
-                href="https://github.com/" 
+                href="https://github.com/AbdifatahOsman2" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="p-2 rounded-full border border-blue-500/50 hover:bg-blue-500/20 transition-all hover:scale-110 hover:shadow-glow"
@@ -88,7 +72,7 @@ const Contact = () => {
                 <Github className="w-5 h-5" />
               </a>
               <a 
-                href="https://linkedin.com/" 
+                href="https://www.linkedin.com/in/abdifatah-o-51552b180/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="p-2 rounded-full border border-blue-500/50 hover:bg-blue-500/20 transition-all hover:scale-110 hover:shadow-glow"
@@ -110,60 +94,64 @@ const Contact = () => {
           <div className="bg-blue-950/20 rounded-xl p-6 backdrop-blur-sm border border-blue-500/20 shadow-xl hover:shadow-blue-500/5 transition-all">
             <h2 className="text-2xl font-semibold mb-6">Send a Message</h2>
             
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <label htmlFor="name" className="block text-sm font-medium">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full bg-blue-950/30 border border-blue-500/30 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                />
+            {state.succeeded ? (
+              <div className="text-center py-10">
+                <h3 className="text-xl font-medium text-green-400 mb-4">Message Sent!</h3>
+                <p className="text-gray-300">Thank you for reaching out. I'll get back to you soon.</p>
               </div>
-              
-              <div className="space-y-2">
-                <label htmlFor="email" className="block text-sm font-medium">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full bg-blue-950/30 border border-blue-500/30 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <label htmlFor="message" className="block text-sm font-medium">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={5}
-                  className="w-full bg-blue-950/30 border border-blue-500/30 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
-                ></textarea>
-              </div>
-              
-              <Button 
-                type="submit" 
-                disabled={isSubmitting}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md transition-all hover:animate-button-glow"
-              >
-                {isSubmitting ? "Sending..." : "Send Message"}
-              </Button>
-            </form>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-2">
+                  <label htmlFor="name" className="block text-sm font-medium">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    className="w-full bg-blue-950/30 border border-blue-500/30 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  />
+                  <ValidationError prefix="Name" field="name" errors={state.errors} className="text-red-400 text-sm mt-1" />
+                </div>
+                
+                <div className="space-y-2">
+                  <label htmlFor="email" className="block text-sm font-medium">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    className="w-full bg-blue-950/30 border border-blue-500/30 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  />
+                  <ValidationError prefix="Email" field="email" errors={state.errors} className="text-red-400 text-sm mt-1" />
+                </div>
+                
+                <div className="space-y-2">
+                  <label htmlFor="message" className="block text-sm font-medium">
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    rows={5}
+                    className="w-full bg-blue-950/30 border border-blue-500/30 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+                  ></textarea>
+                  <ValidationError prefix="Message" field="message" errors={state.errors} className="text-red-400 text-sm mt-1" />
+                </div>
+                
+                <Button 
+                  type="submit" 
+                  disabled={state.submitting}
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md transition-all hover:animate-button-glow"
+                >
+                  {state.submitting ? "Sending..." : "Send Message"}
+                </Button>
+              </form>
+            )}
           </div>
         </div>
       </div>
