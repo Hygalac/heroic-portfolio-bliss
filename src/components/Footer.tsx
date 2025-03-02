@@ -47,12 +47,12 @@ const Footer = () => {
               >
                 Skills
               </a>
-              <a 
-                href="#contact" 
+              <Link 
+                to="/contact" 
                 className="transition-all duration-300 hover:text-blue-400 hover:translate-x-1"
               >
                 Contact
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -90,11 +90,11 @@ const Footer = () => {
             
             {/* Contact email */}
             <a 
-              href="mailto:contact@example.com" 
+              href="mailto:abdifatahosman205@gmail.com" 
               className="flex items-center space-x-2 text-gray-300 transition-all duration-300 hover:text-blue-400"
             >
               <Mail size={16} />
-              <span>contact@example.com</span>
+              <span>abdifatahosman205@gmail.com</span>
             </a>
           </div>
         </div>

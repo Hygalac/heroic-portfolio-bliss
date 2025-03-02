@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -38,13 +39,13 @@ const Hero = () => {
               I design and code beautifully simple things, and I love what I do.
             </p>
             
-            <button 
-              className="px-8 py-4 bg-blue-500 text-white rounded-lg font-mono transform transition-all duration-300 hover:scale-105 hover:bg-blue-600 animate-fade-in opacity-0 animate-button-glow" 
+            <Link 
+              to="/contact" 
+              className="inline-block px-8 py-4 bg-blue-500 text-white rounded-lg font-mono transform transition-all duration-300 hover:scale-105 hover:bg-blue-600 animate-fade-in opacity-0 animate-button-glow" 
               style={{ animationDelay: "1s" }}
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Work With Me!
-            </button>
+            </Link>
           </div>
 
           {/* Placeholder for future illustration */}

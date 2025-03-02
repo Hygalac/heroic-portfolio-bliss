@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import BackgroundAnimation from "@/components/skills/BackgroundAnimation";
 import { toast } from "@/hooks/use-toast";
-import { ArrowUp, Mail, Github, Linkedin, BookOpen } from "lucide-react";
+import { Mail, Github, Linkedin, BookOpen } from "lucide-react";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -35,22 +35,15 @@ const Contact = () => {
     }, 1500);
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
   return (
-    <main className="min-h-screen flex flex-col relative overflow-hidden py-16 px-4">
+    <main className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden py-16 px-4">
       {/* Background animation */}
       <BackgroundAnimation opacity={0.06} />
 
-      <div className="container mx-auto relative z-10">
+      <div className="container mx-auto max-w-6xl relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           {/* Left column - Image and info */}
-          <div className="flex flex-col items-center lg:items-start">
+          <div className="flex flex-col items-center">
             <div className="relative mb-6">
               {/* Blob shape behind image */}
               <div 
@@ -71,15 +64,15 @@ const Contact = () => {
               </div>
             </div>
 
-            <h1 className="text-4xl font-bold mb-4 text-center lg:text-left">Get In Touch</h1>
-            <p className="text-lg mb-8 text-gray-300 max-w-md text-center lg:text-left">
+            <h1 className="text-4xl font-bold mb-4 text-center">Get In Touch</h1>
+            <p className="text-lg mb-8 text-gray-300 max-w-md text-center">
               I'm always open to new opportunities and collaborations. Feel free to reach out!
             </p>
 
             {/* Social links */}
             <div className="flex gap-4 mb-10">
               <a 
-                href="mailto:contact@abdifatahosman.com" 
+                href="mailto:abdifatahosman205@gmail.com" 
                 className="p-2 rounded-full border border-blue-500/50 hover:bg-blue-500/20 transition-all hover:scale-110 hover:shadow-glow"
                 aria-label="Email"
               >
@@ -174,15 +167,6 @@ const Contact = () => {
           </div>
         </div>
       </div>
-
-      {/* Back to top button */}
-      <button
-        onClick={scrollToTop}
-        className="fixed bottom-6 right-6 p-3 rounded-full bg-blue-600/80 hover:bg-blue-700 shadow-lg transition-all hover:scale-110 hover:shadow-blue-500/30 backdrop-blur-sm z-20"
-        aria-label="Back to top"
-      >
-        <ArrowUp className="w-5 h-5 text-white" />
-      </button>
     </main>
   );
 };
