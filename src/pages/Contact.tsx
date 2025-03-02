@@ -1,23 +1,11 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import BackgroundAnimation from "@/components/skills/BackgroundAnimation";
-import { toast } from "@/hooks/use-toast";
-import { Mail, Github, Linkedin, BookOpen } from "lucide-react";
 import { useForm, ValidationError } from '@formspree/react';
+import { ArrowLeft, Mail, Github, Linkedin, BookOpen } from "lucide-react";
 
 const Contact = () => {
   const [state, handleSubmit] = useForm("xbldnork");
-
-  // Show toast on successful submission
-  React.useEffect(() => {
-    if (state.succeeded) {
-      toast({
-        title: "Message Sent!",
-        description: "Thank you for reaching out. I'll get back to you soon.",
-      });
-    }
-  }, [state.succeeded]);
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden py-16 px-4">
@@ -97,7 +85,15 @@ const Contact = () => {
             {state.succeeded ? (
               <div className="text-center py-10">
                 <h3 className="text-xl font-medium text-green-400 mb-4">Message Sent!</h3>
-                <p className="text-gray-300">Thank you for reaching out. I'll get back to you soon.</p>
+                <p className="text-gray-300 mb-6">Thank you for reaching out. I'll get back to you soon.</p>
+                <Button 
+                  variant="outline" 
+                  onClick={() => window.location.href = "/"} 
+                  className="inline-flex items-center gap-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition-all"
+                >
+                  <ArrowLeft size={16} />
+                  Back Home
+                </Button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">

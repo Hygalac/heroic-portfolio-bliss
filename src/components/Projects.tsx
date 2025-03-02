@@ -1,25 +1,29 @@
 
 import { useEffect, useRef } from "react";
 import { Button } from "./ui/button";
+import { Lock } from "lucide-react";
 
 const projects = [
   {
-    title: "Mobile App Showcase",
-    description: "A fully responsive mobile app with a sleek UI and backend integration.",
-    image: "/placeholder.svg",
+    title: "Cloud Infrastructure Project",
+    description: "A comprehensive cloud infrastructure solution with automatic scaling and high availability.",
+    image: "/lovable-uploads/4de8007d-f8c4-4efc-bb21-910da3ac3ee6.png",
     position: "left",
+    private: true
   },
   {
-    title: "Game Development Project",
-    description: "A 2D/3D game built with modern engines, featuring interactive gameplay mechanics.",
-    image: "/placeholder.svg",
+    title: "CICD Pipeline Framework",
+    description: "An end-to-end CI/CD pipeline framework for automated building, testing, and deployment.",
+    image: "/lovable-uploads/239c067d-83e5-475f-a17d-1a7a35b741b5.png",
     position: "right",
+    private: false
   },
   {
-    title: "System Automation Tool",
-    description: "A custom automation tool designed to optimize workflows and enhance productivity.",
-    image: "/placeholder.svg",
+    title: "Sustainable Agriculture System",
+    description: "An IoT-powered system for monitoring and optimizing agricultural production in sustainable settings.",
+    image: "/lovable-uploads/f21de0e2-93a9-48cc-8542-15043d77d863.png",
     position: "left",
+    private: true
   },
 ];
 
@@ -82,12 +86,31 @@ const Projects = () => {
               <div className="w-full lg:w-1/2 space-y-4">
                 <h3 className="text-2xl font-bold text-white">{project.title}</h3>
                 <p className="text-gray-400">{project.description}</p>
-                <Button
-                  variant="outline"
-                  className="mt-4 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition-colors duration-300"
-                >
-                  View Project
-                </Button>
+                <div className="flex gap-4 mt-6">
+                  <Button
+                    variant="outline"
+                    className="border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition-colors duration-300"
+                  >
+                    View Project
+                  </Button>
+                  {project.private ? (
+                    <Button
+                      variant="outline"
+                      className="border-gray-600 text-gray-400 hover:bg-gray-700 hover:text-gray-300 transition-colors duration-300 cursor-not-allowed"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      <Lock className="mr-2" size={16} />
+                      Private Code
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="outline"
+                      className="border-green-600 text-green-500 hover:bg-green-700 hover:text-white transition-colors duration-300"
+                    >
+                      View Code
+                    </Button>
+                  )}
+                </div>
               </div>
             </div>
           ))}
