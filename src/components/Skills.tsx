@@ -17,6 +17,10 @@ const Skills: React.FC = () => {
         
         {/* Neural network visualization */}
         <SkillNetwork skills={skillsData} />
+        
+        <div className="mt-8 text-center text-sm text-blue-400/60">
+          Drag to pan and explore all skills
+        </div>
       </div>
     </section>
   );

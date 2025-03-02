@@ -14,6 +14,12 @@ interface SkillNodeProps {
 const SkillNode: React.FC<SkillNodeProps> = ({ skill, isVisible, hoveredSkill, onHover }) => {
   if (!skill.position) return null;
   
+  // Determine if this node is connected to the hovered node
+  const isConnected = hoveredSkill ? 
+    skill.connections.includes(hoveredSkill) || 
+    (skill.id === hoveredSkill) : 
+    false;
+  
   return (
     <TooltipProvider>
       <Tooltip>
@@ -24,12 +30,15 @@ const SkillNode: React.FC<SkillNodeProps> = ({ skill, isVisible, hoveredSkill, o
             } ${
               hoveredSkill === skill.id
                 ? "border-blue-400 shadow-[0_0_15px_rgba(56,189,248,0.6)] scale-110"
+                : isConnected
+                ? "border-blue-500/70 shadow-[0_0_10px_rgba(56,189,248,0.3)] scale-105"
                 : "border-blue-900/50 hover:border-blue-500"
             }`}
             style={{
               left: skill.position.x,
               top: skill.position.y,
               transitionDelay: `${Math.random() * 0.5}s`,
+              zIndex: hoveredSkill === skill.id || isConnected ? 30 : 20,
             }}
             onMouseEnter={() => onHover(skill.id)}
             onMouseLeave={() => onHover(null)}
