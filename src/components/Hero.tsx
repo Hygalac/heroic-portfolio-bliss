@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Ladder } from "lucide-react";
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -27,9 +28,12 @@ const Hero = () => {
           {/* Text Content */}
           <div className={`space-y-6 ${isVisible ? 'opacity-100' : 'opacity-0'} transition-opacity duration-1000`}>
             <div className="space-y-2">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white font-mono animate-fade-in opacity-0" style={{ animationDelay: "0.4s" }}>
-                Abdifatah Osman
-              </h1>
+              <div className="flex items-center gap-3">
+                <Ladder size={32} className="text-blue-500" />
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white font-mono animate-fade-in opacity-0" style={{ animationDelay: "0.4s" }}>
+                  AbdifataOsman
+                </h1>
+              </div>
               <p className="text-xl sm:text-2xl text-blue-100 font-mono animate-fade-in opacity-0" style={{ animationDelay: "0.6s" }}>
                 Systems Engineer | Mobile & Game Developer
               </p>
