@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Skill } from "./types";
 
@@ -59,19 +58,38 @@ export const useSkillPositioning = ({ skills: initialSkills, windowSize }: UseSk
       let xPos = categoryCenter.x + horizontalRadius * Math.cos(angle) + noiseX;
       let yPos = categoryCenter.y + verticalRadius * Math.sin(angle) + noiseY;
       
-      // Custom position adjustments for specific nodes
+      // Custom position adjustments for specific nodes - updated positions per user request
       const customPositions: Record<string, { x: number, y: number }> = {
-        "linux": { x: -80, y: 0 },
-        "react": { x: -70, y: 20 },
-        "wireshark": { x: 0, y: 50 },
-        "javascript": { x: 60, y: 0 },
-        "python": { x: 20, y: -30 },
-        "git": { x: -20, y: -40 },
-        "typescript": { x: 40, y: 30 },
-        "nodejs": { x: -30, y: 60 },
-        "express": { x: 70, y: -20 },
-        "mongodb": { x: -50, y: -60 },
-        "mysql": { x: 80, y: 40 },
+        "wireshark": { x: 0, y: 100 },
+        "git": { x: -20, y: 80 },
+        "cicd": { x: 30, y: 90 },
+        
+        "mongodb": { x: 100, y: -60 },
+        "azure": { x: 120, y: 0 },
+        "terraform": { x: 100, y: 30 },
+        
+        "reactnative": { x: -100, y: -20 },
+        
+        "linux": { x: -100, y: 0 },
+        "react": { x: -70, y: -50 },
+        "javascript": { x: 60, y: -40 },
+        "python": { x: 20, y: -80 },
+        "typescript": { x: 40, y: 60 },
+        "nodejs": { x: -30, y: 20 },
+        "express": { x: 70, y: -70 },
+        "mysql": { x: 80, y: 80 },
+        "npm": { x: -60, y: -30 },
+        "lighthouse": { x: -90, y: 40 },
+        "rest": { x: 50, y: 50 },
+        "bash": { x: 0, y: -70 },
+        "unity": { x: -40, y: -90 },
+        "siem": { x: 90, y: -20 },
+        "qualys": { x: -80, y: 70 },
+        "automox": { x: 40, y: -30 },
+        "okta": { x: -50, y: 30 },
+        "prometheus": { x: 90, y: 60 },
+        "ansible": { x: -80, y: -60 },
+        "docker": { x: 20, y: 70 },
       };
       
       // Apply custom position offsets if defined
