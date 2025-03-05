@@ -74,6 +74,7 @@ const Projects = () => {
                   <img
                     src={project.image}
                     alt={project.title}
+                    loading="lazy"
                     className="w-full h-[300px] lg:h-[400px] object-cover transform transition-transform duration-700 group-hover:scale-105"
                     style={{
                       transform: `translateY(${index * 10}px)`,

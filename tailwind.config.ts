@@ -93,6 +93,10 @@ export default {
         "timeline-light-movement": {
           "0%": { top: "0%", boxShadow: "0 0 10px 2px rgba(59, 130, 246, 0.7)" },
           "100%": { top: "100%", boxShadow: "0 0 10px 2px rgba(59, 130, 246, 0.7)" }
+        },
+        "text-decode": {
+          "0%": { filter: "blur(4px)", opacity: "0.3" },
+          "100%": { filter: "blur(0)", opacity: "1" }
         }
       },
       animation: {
@@ -103,7 +107,8 @@ export default {
         "draw-line": "draw-line 1.5s ease-out forwards",
         pulse: "pulse 2s ease-in-out infinite",
         breathe: "breathe 3s ease-in-out infinite",
-        "timeline-light-movement": "timeline-light-movement 4s linear infinite"
+        "timeline-light-movement": "timeline-light-movement 8s linear infinite", // Slowed from 4s to 8s
+        "text-decode": "text-decode 0.5s ease-out forwards"
       },
       boxShadow: {
         glow: "0 0 15px rgba(59, 130, 246, 0.5)"
