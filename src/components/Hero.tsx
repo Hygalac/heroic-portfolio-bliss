@@ -1,50 +1,13 @@
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-const arabicChars = "ابتثجحخدذرزسشصضطظعغفقكلمنهوي";
-const finalText = "I design and code beautifully simple things, and I love what I do.";
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [decodedText, setDecodedText] = useState("");
-  const textRef = useRef<HTMLParagraphElement>(null);
-  const decodeStarted = useRef(false);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
-
-  useEffect(() => {
-    if (isVisible && !decodeStarted.current) {
-      decodeStarted.current = true;
-      
-      // Start with random Arabic characters, preserving spaces
-      const initialRandomText = Array.from(finalText).map(char => 
-        char === ' ' ? ' ' : arabicChars.charAt(Math.floor(Math.random() * arabicChars.length))
-      ).join('');
-      
-      setDecodedText(initialRandomText);
-
-      let position = 0;
-      const interval = setInterval(() => {
-        if (position >= finalText.length) {
-          clearInterval(interval);
-          return;
-        }
-
-        setDecodedText(prev => {
-          const arr = prev.split('');
-          arr[position] = finalText[position];
-          return arr.join('');
-        });
-
-        position++;
-      }, 70); // Adjust speed here (lower = faster)
-
-      return () => clearInterval(interval);
-    }
-  }, [isVisible]);
 
   return (
     <div className="relative min-h-screen bg-[#010F18] overflow-hidden">
@@ -54,8 +17,6 @@ const Hero = () => {
           src="/lovable-uploads/bafdc1e7-7019-4c27-9796-40ab46b25a1d.png"
           alt="Hero Background"
           className="w-full h-full object-cover"
-          loading="lazy"
-          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#010F18]" />
       </div>
@@ -74,25 +35,8 @@ const Hero = () => {
               </p>
             </div>
             
-            <p 
-              ref={textRef} 
-              className="text-lg text-gray-300 w-full lg:max-w-2xl font-mono whitespace-pre-wrap"
-              style={{ fontFamily: "monospace" }}
-            >
-              {decodedText.split('').map((char, index) => (
-                <span 
-                  key={index} 
-                  className="inline-block animate-text-decode"
-                  style={{ 
-                    animationDelay: `${index * 0.04}s`,
-                    opacity: 0,
-                    width: char === ' ' ? '0.25em' : 'auto',
-                    marginRight: char === ' ' ? '0' : '0.05em'
-                  }}
-                >
-                  {char}
-                </span>
-              ))}
+            <p className="text-lg text-gray-300 max-w-xl font-mono animate-fade-in opacity-0" style={{ animationDelay: "0.8s" }}>
+              I design and code beautifully simple things, and I love what I do.
             </p>
             
             <Link 
