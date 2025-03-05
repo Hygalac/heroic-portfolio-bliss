@@ -78,6 +78,9 @@ const AboutMe = () => {
           {/* Center line */}
           <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-blue-500/20"></div>
           
+          {/* Moving light animation along timeline */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-3 h-3 rounded-full bg-blue-500 z-20 animate-timeline-light-movement"></div>
+          
           {/* Timeline Items */}
           
           {/* Milestone 1: Certifications */}
@@ -88,7 +91,7 @@ const AboutMe = () => {
             >
               <div className="md:w-1/2 md:pr-16 md:text-right mb-8 md:mb-0">
                 <div className="bg-blue-900/20 p-6 rounded-lg shadow-lg border border-blue-500/20 hover:border-blue-500/50 transition-all duration-300">
-                  <h3 className="text-xl font-semibold text-blue-400 mb-2">Network+ and AWS Cloud Practitioner - 2023</h3>
+                  <h3 className="text-xl font-semibold text-blue-400 mb-2">IT Specialist - Provided IT engineering expertise on various Fortune 500 projects, supporting large-scale enterprise environments.</h3>
                   <p className="text-gray-300">
                     Developed a passion for cloud infrastructure and networking fundamentals, laying the groundwork for my engineering career.
                   </p>
