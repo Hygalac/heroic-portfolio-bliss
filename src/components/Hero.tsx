@@ -19,9 +19,9 @@ const Hero = () => {
     if (isVisible && !decodeStarted.current) {
       decodeStarted.current = true;
       
-      // Start with random Arabic characters for the entire text
-      const initialRandomText = Array.from({ length: finalText.length }, () => 
-        arabicChars.charAt(Math.floor(Math.random() * arabicChars.length))
+      // Start with random Arabic characters, preserving spaces
+      const initialRandomText = Array.from(finalText).map(char => 
+        char === ' ' ? ' ' : arabicChars.charAt(Math.floor(Math.random() * arabicChars.length))
       ).join('');
       
       setDecodedText(initialRandomText);
@@ -55,7 +55,7 @@ const Hero = () => {
           alt="Hero Background"
           className="w-full h-full object-cover"
           loading="lazy"
-          fetchpriority="high"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#010F18]" />
       </div>
@@ -76,7 +76,7 @@ const Hero = () => {
             
             <p 
               ref={textRef} 
-              className="text-lg text-gray-300 max-w-xl font-mono"
+              className="text-lg text-gray-300 w-full lg:max-w-2xl font-mono whitespace-pre-wrap"
               style={{ fontFamily: "monospace" }}
             >
               {decodedText.split('').map((char, index) => (
@@ -85,7 +85,9 @@ const Hero = () => {
                   className="inline-block animate-text-decode"
                   style={{ 
                     animationDelay: `${index * 0.04}s`,
-                    opacity: 0
+                    opacity: 0,
+                    width: char === ' ' ? '0.25em' : 'auto',
+                    marginRight: char === ' ' ? '0' : '0.05em'
                   }}
                 >
                   {char}
