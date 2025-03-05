@@ -55,7 +55,7 @@ const Hero = () => {
           alt="Hero Background"
           className="w-full h-full object-cover"
           loading="lazy"
-          fetchpriority="high"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#010F18]" />
       </div>
