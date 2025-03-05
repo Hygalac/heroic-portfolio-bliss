@@ -83,8 +83,8 @@ export default {
           "100%": { height: "100%" }
         },
         pulse: {
-          "0%, 100%": { opacity: "1" },
-          "50%": { opacity: "0.5" }
+          "0%, 100%": { opacity: "1", transform: "scale(1)" },
+          "50%": { opacity: "0.7", transform: "scale(1.1)" }
         },
         breathe: {
           "0%, 100%": { transform: "scale(1)" },
@@ -103,10 +103,10 @@ export default {
         "draw-line": "draw-line 1.5s ease-out forwards",
         pulse: "pulse 2s ease-in-out infinite",
         breathe: "breathe 3s ease-in-out infinite",
-        "timeline-light-movement": "timeline-light-movement 4s linear infinite"
+        "timeline-light-movement": "timeline-light-movement 10s linear infinite"
       },
       boxShadow: {
-        glow: "0 0 15px rgba(59, 130, 246, 0.5)"
+        glow: "0 0 15px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.6)"
       }
     },
   },
