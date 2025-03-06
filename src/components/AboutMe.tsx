@@ -6,6 +6,7 @@ const AboutMe = () => {
   const timelineItems = useRef<(HTMLDivElement | null)[]>([]);
   const connectors = useRef<(HTMLDivElement | null)[]>([]);
   const [activeNodeIndex, setActiveNodeIndex] = useState<number | null>(null);
+  const [animationStarted, setAnimationStarted] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -52,36 +53,12 @@ const AboutMe = () => {
       }
     });
 
-    // Setup animation for the moving light
-    let currentNode = 0;
-    const totalNodes = 4; // Total number of nodes in our timeline
-    
-    const animateTimeline = () => {
-      if (currentNode < totalNodes) {
-        setActiveNodeIndex(currentNode);
-        
-        // Wait at the node for 3 seconds, then move to next
-        setTimeout(() => {
-          currentNode++;
-          if (currentNode < totalNodes) {
-            animateTimeline();
-          } else {
-            // Reset after reaching the end
-            setTimeout(() => {
-              setActiveNodeIndex(null);
-              currentNode = 0;
-              animateTimeline();
-            }, 1000);
-          }
-        }, 3000);
-      }
-    };
-    
-    // Start the animation when the section comes into view
+    // Start timeline animation when section comes into view
     const timelineObserver = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
-          animateTimeline();
+        if (entries[0].isIntersecting && !animationStarted) {
+          setAnimationStarted(true);
+          animateTimelineLight();
         }
       },
       { threshold: 0.1 }
@@ -95,7 +72,38 @@ const AboutMe = () => {
       observer.disconnect();
       timelineObserver.disconnect();
     };
-  }, []);
+  }, [animationStarted]);
+
+  // Function to animate the timeline light
+  const animateTimelineLight = () => {
+    let currentNode = 0;
+    const totalNodes = 4; // Total number of nodes in our timeline
+    
+    const moveToNextNode = () => {
+      if (currentNode < totalNodes) {
+        setActiveNodeIndex(currentNode);
+        
+        // Wait at the node for 3 seconds, then move to next
+        setTimeout(() => {
+          currentNode++;
+          if (currentNode < totalNodes) {
+            moveToNextNode();
+          } else {
+            // Reset after reaching the end
+            setTimeout(() => {
+              setActiveNodeIndex(null);
+              currentNode = 0;
+              setTimeout(() => {
+                moveToNextNode();
+              }, 1000);
+            }, 3000);
+          }
+        }, 3000);
+      }
+    };
+
+    moveToNextNode();
+  };
 
   return (
     <section id="about" className="py-20 bg-[#010F18]" ref={sectionRef}>
@@ -116,7 +124,17 @@ const AboutMe = () => {
         {/* Timeline */}
         <div className="relative max-w-5xl mx-auto">
           {/* Center line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-blue-500/20"></div>
+          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-blue-500/20">
+            {/* Traveling light effect */}
+            {animationStarted && (
+              <div className="absolute w-3 h-3 left-1/2 transform -translate-x-1/2 rounded-full bg-blue-500 shadow-glow z-20 transition-all duration-1000 ease-in-out" 
+                   style={{ 
+                     top: activeNodeIndex !== null ? `${activeNodeIndex * 33.33}%` : '-10px',
+                     opacity: activeNodeIndex !== null ? 1 : 0
+                   }} 
+              />
+            )}
+          </div>
           
           {/* Timeline Nodes */}
           
