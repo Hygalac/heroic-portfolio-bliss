@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from "react";
 import { Button } from "./ui/button";
 import { Lock } from "lucide-react";
@@ -8,7 +9,8 @@ const projects = [
     description: "An innovative mobile app that helps users sleep with the soothing sound of the Quran, combining technology with mindfulness.",
     image: "/lovable-uploads/9fa36430-d4dc-48cc-8b93-c6a44412aea2.png",
     position: "left",
-    private: false
+    private: true,
+    projectLink: "https://apps.apple.com/us/app/rahatul-ruh/id6740393825"
   },
   {
     title: "CICD Pipeline Framework",
@@ -90,6 +92,7 @@ const Projects = () => {
                   <Button
                     variant="outline"
                     className="border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition-colors duration-300"
+                    onClick={() => project.projectLink && window.open(project.projectLink, '_blank')}
                   >
                     View Project
                   </Button>
