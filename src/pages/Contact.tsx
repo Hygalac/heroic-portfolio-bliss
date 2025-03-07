@@ -1,8 +1,10 @@
+
 import React from "react";
 import { Button } from "@/components/ui/button";
 import BackgroundAnimation from "@/components/skills/BackgroundAnimation";
 import { useForm, ValidationError } from '@formspree/react';
 import { ArrowLeft, Mail, Github, Linkedin, BookOpen } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Contact = () => {
   const [state, handleSubmit] = useForm("xbldnork");
@@ -11,6 +13,20 @@ const Contact = () => {
     <main className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden py-16 px-4">
       {/* Background animation */}
       <BackgroundAnimation opacity={0.06} />
+
+      {/* Back button */}
+      <div className="absolute top-6 left-6 z-20">
+        <Link to="/">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="group flex items-center gap-1 text-gray-400 hover:text-blue-400 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+            <span>Back</span>
+          </Button>
+        </Link>
+      </div>
 
       <div className="container mx-auto max-w-6xl relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
