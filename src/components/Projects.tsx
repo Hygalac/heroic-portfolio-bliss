@@ -1,15 +1,14 @@
-
 import { useEffect, useRef } from "react";
 import { Button } from "./ui/button";
 import { Lock } from "lucide-react";
 
 const projects = [
   {
-    title: "Cloud Infrastructure Project",
-    description: "A comprehensive cloud infrastructure solution with automatic scaling and high availability.",
-    image: "/lovable-uploads/4de8007d-f8c4-4efc-bb21-910da3ac3ee6.png",
+    title: "Rahatul Ruh",
+    description: "An innovative mobile app that helps users sleep with the soothing sound of the Quran, combining technology with mindfulness.",
+    image: "/lovable-uploads/9fa36430-d4dc-48cc-8b93-c6a44412aea2.png",
     position: "left",
-    private: true
+    private: false
   },
   {
     title: "CICD Pipeline Framework",
@@ -19,9 +18,9 @@ const projects = [
     private: false
   },
   {
-    title: "Sustainable Agriculture System",
-    description: "An IoT-powered system for monitoring and optimizing agricultural production in sustainable settings.",
-    image: "/lovable-uploads/f21de0e2-93a9-48cc-8542-15043d77d863.png",
+    title: "Cloud Infrastructure Project",
+    description: "A comprehensive cloud infrastructure solution with automatic scaling and high availability.",
+    image: "/lovable-uploads/4de8007d-f8c4-4efc-bb21-910da3ac3ee6.png",
     position: "left",
     private: true
   },
