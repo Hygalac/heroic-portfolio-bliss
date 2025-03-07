@@ -69,7 +69,8 @@ const Hero = () => {
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white font-mono animate-fade-in opacity-0" style={{ animationDelay: "0.4s" }}>
                 Abdifatah Osman
               </h1>
-              <p className="text-xl sm:text-2xl text-blue-100 font-mono animate-fade-in opacity-0" style={{ animationDelay: "0.6s" }}>
+              {/* Changed: Remove animation from subheading and make it appear normally */}
+              <p className="text-xl sm:text-2xl text-blue-100 font-mono">
                 Systems Engineer | Mobile & Game Developer
               </p>
             </div>
