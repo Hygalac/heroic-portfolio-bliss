@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
@@ -76,24 +75,9 @@ const Hero = () => {
             </div>
             
             <p 
-              ref={textRef} 
-              className="text-lg text-gray-300 w-full lg:max-w-2xl font-mono whitespace-pre-wrap"
-              style={{ fontFamily: "monospace" }}
+              className="text-lg text-gray-300 w-full lg:max-w-2xl font-mono"
             >
-              {decodedText.split('').map((char, index) => (
-                <span 
-                  key={index} 
-                  className="inline-block animate-text-decode"
-                  style={{ 
-                    animationDelay: `${index * 0.04}s`,
-                    opacity: 0,
-                    width: char === ' ' ? '0.25em' : 'auto',
-                    marginRight: char === ' ' ? '0' : '0.05em'
-                  }}
-                >
-                  {char}
-                </span>
-              ))}
+              I design and code beautifully simple things, and I love what I do.
             </p>
             
             <Link 
