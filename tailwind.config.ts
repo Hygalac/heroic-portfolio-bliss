@@ -83,18 +83,20 @@ export default {
           "100%": { height: "100%" }
         },
         pulse: {
-          "0%, 100%": { opacity: "1", transform: "scale(1)" },
-          "50%": { opacity: "0.7", transform: "scale(1.1)" }
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.5" }
         },
         breathe: {
           "0%, 100%": { transform: "scale(1)" },
           "50%": { transform: "scale(1.05)" }
         },
-        "timeline-light": {
-          "0%": { top: "-10px", opacity: "0" },
-          "10%": { top: "-10px", opacity: "1" },
-          "90%": { top: "calc(100% + 10px)", opacity: "1" },
-          "100%": { top: "calc(100% + 10px)", opacity: "0" }
+        "timeline-light-movement": {
+          "0%": { top: "0%", boxShadow: "0 0 10px 2px rgba(59, 130, 246, 0.7)" },
+          "100%": { top: "100%", boxShadow: "0 0 10px 2px rgba(59, 130, 246, 0.7)" }
+        },
+        "text-decode": {
+          "0%": { filter: "blur(4px)", opacity: "0.3" },
+          "100%": { filter: "blur(0)", opacity: "1" }
         }
       },
       animation: {
@@ -105,10 +107,11 @@ export default {
         "draw-line": "draw-line 1.5s ease-out forwards",
         pulse: "pulse 2s ease-in-out infinite",
         breathe: "breathe 3s ease-in-out infinite",
-        "timeline-light": "timeline-light 15s linear forwards"
+        "timeline-light-movement": "timeline-light-movement 8s linear infinite", // Slowed from 4s to 8s
+        "text-decode": "text-decode 0.5s ease-out forwards"
       },
       boxShadow: {
-        glow: "0 0 15px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.6)"
+        glow: "0 0 15px rgba(59, 130, 246, 0.5)"
       }
     },
   },
