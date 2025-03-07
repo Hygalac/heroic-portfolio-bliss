@@ -1,10 +1,12 @@
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const AboutMe = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const timelineItems = useRef<(HTMLDivElement | null)[]>([]);
   const connectors = useRef<(HTMLDivElement | null)[]>([]);
+  const [activeNodeIndex, setActiveNodeIndex] = useState<number | null>(null);
+  const [animationStarted, setAnimationStarted] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -51,19 +53,65 @@ const AboutMe = () => {
       }
     });
 
+    // Start timeline animation when section comes into view
+    const timelineObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !animationStarted) {
+          setAnimationStarted(true);
+          animateTimelineLight();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    
+    if (sectionRef.current) {
+      timelineObserver.observe(sectionRef.current);
+    }
+
     return () => {
       observer.disconnect();
+      timelineObserver.disconnect();
     };
-  }, []);
+  }, [animationStarted]);
+
+  // Function to animate the timeline light
+  const animateTimelineLight = () => {
+    let currentNode = 0;
+    const totalNodes = 4; // Total number of nodes in our timeline
+    
+    const moveToNextNode = () => {
+      if (currentNode < totalNodes) {
+        setActiveNodeIndex(currentNode);
+        
+        // Wait at the node for 3 seconds, then move to next
+        setTimeout(() => {
+          currentNode++;
+          if (currentNode < totalNodes) {
+            moveToNextNode();
+          } else {
+            // Reset after reaching the end
+            setTimeout(() => {
+              setActiveNodeIndex(null);
+              currentNode = 0;
+              setTimeout(() => {
+                moveToNextNode();
+              }, 1000);
+            }, 3000);
+          }
+        }, 3000);
+      }
+    };
+
+    moveToNextNode();
+  };
 
   return (
-    <section id="about" className="py-20 bg-[#010F18]">
+    <section id="about" className="py-20 bg-[#010F18]" ref={sectionRef}>
       <div className="container px-4 mx-auto">
         <h2 className="text-4xl font-bold text-center mb-12 text-white">About Me</h2>
         
         {/* Introduction */}
         <div 
-          ref={sectionRef} 
           className="max-w-3xl mx-auto mb-16 opacity-0 text-white text-center"
         >
           <p className="text-lg leading-relaxed">
@@ -76,12 +124,19 @@ const AboutMe = () => {
         {/* Timeline */}
         <div className="relative max-w-5xl mx-auto">
           {/* Center line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-blue-500/20"></div>
+          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-blue-500/20">
+            {/* Traveling light effect */}
+            {animationStarted && (
+              <div className="absolute w-3 h-3 left-1/2 transform -translate-x-1/2 rounded-full bg-blue-500 shadow-glow z-20 transition-all duration-1000 ease-in-out" 
+                   style={{ 
+                     top: activeNodeIndex !== null ? `${activeNodeIndex * 33.33}%` : '-10px',
+                     opacity: activeNodeIndex !== null ? 1 : 0
+                   }} 
+              />
+            )}
+          </div>
           
-          {/* Moving light animation along timeline */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-3 h-3 rounded-full bg-blue-500 z-20 animate-timeline-light-movement"></div>
-          
-          {/* Timeline Items */}
+          {/* Timeline Nodes */}
           
           {/* Milestone 1: Certifications */}
           <div className="relative mb-24">
@@ -97,7 +152,7 @@ const AboutMe = () => {
                   </p>
                 </div>
               </div>
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-blue-500 border-4 border-[#010F18] z-10"></div>
+              <div className={`absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-blue-500 border-4 border-[#010F18] z-10 ${activeNodeIndex === 0 ? 'animate-pulse shadow-glow' : ''}`}></div>
               <div className="md:w-1/2"></div>
             </div>
             <div 
@@ -115,7 +170,7 @@ const AboutMe = () => {
               className="flex flex-col md:flex-row items-center opacity-0"
             >
               <div className="md:w-1/2"></div>
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-blue-500 border-4 border-[#010F18] z-10"></div>
+              <div className={`absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-blue-500 border-4 border-[#010F18] z-10 ${activeNodeIndex === 1 ? 'animate-pulse shadow-glow' : ''}`}></div>
               <div className="md:w-1/2 md:pl-16 text-left mb-8 md:mb-0">
                 <div className="bg-blue-900/20 p-6 rounded-lg shadow-lg border border-blue-500/20 hover:border-blue-500/50 transition-all duration-300">
                   <h3 className="text-xl font-semibold text-blue-400 mb-2">System Administrator at Intel Corporation - Feb 2023 - Feb 2024</h3>
@@ -147,7 +202,7 @@ const AboutMe = () => {
                   </p>
                 </div>
               </div>
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-blue-500 border-4 border-[#010F18] z-10"></div>
+              <div className={`absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-blue-500 border-4 border-[#010F18] z-10 ${activeNodeIndex === 2 ? 'animate-pulse shadow-glow' : ''}`}></div>
               <div className="md:w-1/2"></div>
             </div>
             <div 
@@ -165,7 +220,7 @@ const AboutMe = () => {
               className="flex flex-col md:flex-row items-center opacity-0"
             >
               <div className="md:w-1/2"></div>
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-blue-500 border-4 border-[#010F18] z-10"></div>
+              <div className={`absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-blue-500 border-4 border-[#010F18] z-10 ${activeNodeIndex === 3 ? 'animate-pulse shadow-glow' : ''}`}></div>
               <div className="md:w-1/2 md:pl-16 text-left">
                 <div className="bg-blue-900/20 p-6 rounded-lg shadow-lg border border-blue-500/20 hover:border-blue-500/50 transition-all duration-300">
                   <h3 className="text-xl font-semibold text-blue-400 mb-2">Systems Engineer at Soul Machines - Feb 2025 - Present</h3>
