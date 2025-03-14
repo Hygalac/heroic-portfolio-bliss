@@ -77,7 +77,7 @@ const Projects = () => {
                     alt={project.title}
                     loading="lazy"
                     decoding="async"
-                    fetchpriority={index === 0 ? "high" : "auto"}
+                    fetchPriority={index === 0 ? "high" : "auto"}
                     className="w-full h-[300px] lg:h-[400px] object-cover transform transition-transform duration-700 group-hover:scale-105"
                     style={{
                       transform: `translateY(${index * 10}px)`,
