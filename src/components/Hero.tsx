@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
@@ -53,8 +54,9 @@ const Hero = () => {
           src="/lovable-uploads/bafdc1e7-7019-4c27-9796-40ab46b25a1d.png"
           alt="Hero Background"
           className="w-full h-full object-cover"
-          loading="lazy"
-          fetchPriority="high"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#010F18]" />
       </div>

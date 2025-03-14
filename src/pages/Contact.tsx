@@ -48,6 +48,8 @@ const Contact = () => {
                   src="/lovable-uploads/1582459f-92ed-49d0-a665-6a03dfb389a7.png"
                   alt="Abdifatah Osman"
                   className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
