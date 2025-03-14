@@ -1,7 +1,6 @@
 
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import SplitScreenTransition from "./SplitScreenTransition";
 
 // Curated set of common Arabic letters for the animation
 const arabicChars = "ابتثجحخدذرزسشصضطظعغفقكلمنهوي";
@@ -12,9 +11,6 @@ const Hero = () => {
   const [decodedText, setDecodedText] = useState("");
   const textRef = useRef<HTMLParagraphElement>(null);
   const decodeStarted = useRef(false);
-  const [transitionActive, setTransitionActive] = useState(false);
-  const [transitionOrigin, setTransitionOrigin] = useState({ x: 0, y: 0 });
-  const buttonRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     setIsVisible(true);
@@ -61,21 +57,6 @@ const Hero = () => {
     }
   }, [isVisible]);
 
-  const handleButtonClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    
-    // Get button position for transition origin
-    if (buttonRef.current) {
-      const rect = buttonRef.current.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      setTransitionOrigin({ x: centerX, y: centerY });
-    }
-    
-    // Activate transition
-    setTransitionActive(true);
-  };
-
   return (
     <div className="relative min-h-screen bg-[#010F18] overflow-hidden">
       {/* Background Image with Parallax Effect */}
@@ -90,14 +71,6 @@ const Hero = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#010F18]" />
       </div>
-
-      {/* Split Screen Transition */}
-      <SplitScreenTransition 
-        isActive={transitionActive}
-        targetPath="/contact"
-        originX={transitionOrigin.x}
-        originY={transitionOrigin.y}
-      />
 
       {/* Content Container */}
       <div className="relative z-10 container mx-auto px-4 h-screen flex items-center">
@@ -122,9 +95,7 @@ const Hero = () => {
             </p>
             
             <Link 
-              ref={buttonRef}
               to="/contact" 
-              onClick={handleButtonClick}
               className="inline-block px-8 py-4 bg-blue-500 text-white rounded-lg font-mono transform transition-all duration-300 hover:scale-105 hover:bg-blue-600 animate-fade-in opacity-0 animate-button-glow" 
               style={{ animationDelay: "1s" }}
             >
