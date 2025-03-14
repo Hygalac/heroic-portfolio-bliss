@@ -2,6 +2,7 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
+// Curated set of common Arabic letters for the animation
 const arabicChars = "ابتثجحخدذرزسشصضطظعغفقكلمنهوي";
 const finalText = "I design and code beautifully simple things, and I love what I do.";
 
@@ -26,6 +27,8 @@ const Hero = () => {
       
       setDecodedText(initialRandomText);
 
+      // Character-by-character decoding animation
+      // Moving left-to-right despite RTL context
       let position = 0;
       const interval = setInterval(() => {
         if (position >= finalText.length) {
@@ -36,6 +39,14 @@ const Hero = () => {
         setDecodedText(prev => {
           const arr = prev.split('');
           arr[position] = finalText[position];
+          
+          // Randomize remaining Arabic characters that haven't been decoded yet
+          for (let i = position + 1; i < arr.length; i++) {
+            if (arr[i] !== ' ') {
+              arr[i] = arabicChars.charAt(Math.floor(Math.random() * arabicChars.length));
+            }
+          }
+          
           return arr.join('');
         });
 
@@ -70,16 +81,17 @@ const Hero = () => {
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white font-mono animate-fade-in opacity-0" style={{ animationDelay: "0.4s" }}>
                 Abdifatah Osman
               </h1>
-              {/* Changed: Remove animation from subheading and make it appear normally */}
               <p className="text-xl sm:text-2xl text-blue-100 font-mono">
                 Systems Engineer | Mobile & Game Developer
               </p>
             </div>
             
             <p 
+              ref={textRef}
               className="text-lg text-gray-300 w-full lg:max-w-2xl font-mono"
+              dir="ltr" // Ensure left-to-right orientation
             >
-              I design and code beautifully simple things, and I love what I do.
+              {decodedText}
             </p>
             
             <Link 
