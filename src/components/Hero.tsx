@@ -4,17 +4,11 @@ import { Link } from "react-router-dom";
 
 // Curated set of common Arabic letters for the animation
 const arabicChars = "ابتثجحخدذرزسشصضطظعغفقكلمنهوي";
-const finalHeading = "Abdifatah Osman";
-const finalSubheading = "Systems Engineer | Mobile & Game Developer";
 const finalText = "I design and code beautifully simple things, and I love what I do.";
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [decodedHeading, setDecodedHeading] = useState("");
-  const [decodedSubheading, setDecodedSubheading] = useState("");
   const [decodedText, setDecodedText] = useState("");
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const subheadingRef = useRef<HTMLParagraphElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
   const decodeStarted = useRef(false);
 
@@ -26,39 +20,28 @@ const Hero = () => {
     if (isVisible && !decodeStarted.current) {
       decodeStarted.current = true;
       
-      // Initialize with random Arabic characters, preserving spaces
-      const initialRandomHeading = Array.from(finalHeading).map(char => 
-        char === ' ' ? ' ' : arabicChars.charAt(Math.floor(Math.random() * arabicChars.length))
-      ).join('');
-      
-      const initialRandomSubheading = Array.from(finalSubheading).map(char => 
-        char === ' ' ? ' ' : arabicChars.charAt(Math.floor(Math.random() * arabicChars.length))
-      ).join('');
-      
+      // Start with random Arabic characters, preserving spaces
       const initialRandomText = Array.from(finalText).map(char => 
         char === ' ' ? ' ' : arabicChars.charAt(Math.floor(Math.random() * arabicChars.length))
       ).join('');
       
-      setDecodedHeading(initialRandomHeading);
-      setDecodedSubheading(initialRandomSubheading);
       setDecodedText(initialRandomText);
 
-      // Decode heading first
-      let headingPosition = 0;
-      const headingInterval = setInterval(() => {
-        if (headingPosition >= finalHeading.length) {
-          clearInterval(headingInterval);
-          // Start subheading animation after heading is done
-          decodeSubheading();
+      // Character-by-character decoding animation
+      // Moving left-to-right despite RTL context
+      let position = 0;
+      const interval = setInterval(() => {
+        if (position >= finalText.length) {
+          clearInterval(interval);
           return;
         }
 
-        setDecodedHeading(prev => {
+        setDecodedText(prev => {
           const arr = prev.split('');
-          arr[headingPosition] = finalHeading[headingPosition];
+          arr[position] = finalText[position];
           
-          // Randomize remaining Arabic characters
-          for (let i = headingPosition + 1; i < arr.length; i++) {
+          // Randomize remaining Arabic characters that haven't been decoded yet
+          for (let i = position + 1; i < arr.length; i++) {
             if (arr[i] !== ' ') {
               arr[i] = arabicChars.charAt(Math.floor(Math.random() * arabicChars.length));
             }
@@ -67,66 +50,10 @@ const Hero = () => {
           return arr.join('');
         });
 
-        headingPosition++;
-      }, 70);
+        position++;
+      }, 70); // Adjust speed here (lower = faster)
 
-      const decodeSubheading = () => {
-        let subheadingPosition = 0;
-        const subheadingInterval = setInterval(() => {
-          if (subheadingPosition >= finalSubheading.length) {
-            clearInterval(subheadingInterval);
-            // Start main text animation after subheading is done
-            decodeMainText();
-            return;
-          }
-
-          setDecodedSubheading(prev => {
-            const arr = prev.split('');
-            arr[subheadingPosition] = finalSubheading[subheadingPosition];
-            
-            // Randomize remaining Arabic characters
-            for (let i = subheadingPosition + 1; i < arr.length; i++) {
-              if (arr[i] !== ' ') {
-                arr[i] = arabicChars.charAt(Math.floor(Math.random() * arabicChars.length));
-              }
-            }
-            
-            return arr.join('');
-          });
-
-          subheadingPosition++;
-        }, 40); // Slightly faster for subheading
-      };
-
-      const decodeMainText = () => {
-        let textPosition = 0;
-        const textInterval = setInterval(() => {
-          if (textPosition >= finalText.length) {
-            clearInterval(textInterval);
-            return;
-          }
-
-          setDecodedText(prev => {
-            const arr = prev.split('');
-            arr[textPosition] = finalText[textPosition];
-            
-            // Randomize remaining Arabic characters
-            for (let i = textPosition + 1; i < arr.length; i++) {
-              if (arr[i] !== ' ') {
-                arr[i] = arabicChars.charAt(Math.floor(Math.random() * arabicChars.length));
-              }
-            }
-            
-            return arr.join('');
-          });
-
-          textPosition++;
-        }, 50); // Medium speed for main text
-      };
-
-      return () => {
-        clearInterval(headingInterval);
-      };
+      return () => clearInterval(interval);
     }
   }, [isVisible]);
 
@@ -151,26 +78,18 @@ const Hero = () => {
           {/* Text Content */}
           <div className={`space-y-6 ${isVisible ? 'opacity-100' : 'opacity-0'} transition-opacity duration-1000`}>
             <div className="space-y-2">
-              <h1 
-                ref={headingRef}
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white font-mono"
-                dir="ltr"
-              >
-                {decodedHeading}
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white font-mono animate-fade-in opacity-0" style={{ animationDelay: "0.4s" }}>
+                Abdifatah Osman
               </h1>
-              <p 
-                ref={subheadingRef}
-                className="text-xl sm:text-2xl text-blue-100 font-mono whitespace-nowrap overflow-hidden text-ellipsis"
-                dir="ltr"
-              >
-                {decodedSubheading}
+              <p className="text-xl sm:text-2xl text-blue-100 font-mono">
+                Systems Engineer | Mobile & Game Developer
               </p>
             </div>
             
             <p 
               ref={textRef}
-              className="text-lg text-gray-300 w-full lg:max-w-2xl font-mono whitespace-nowrap overflow-hidden text-ellipsis"
-              dir="ltr"
+              className="text-lg text-gray-300 w-full lg:max-w-2xl font-mono"
+              dir="ltr" // Ensure left-to-right orientation
             >
               {decodedText}
             </p>
