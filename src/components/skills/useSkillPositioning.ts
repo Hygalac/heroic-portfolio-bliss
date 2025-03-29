@@ -71,9 +71,7 @@ export const useSkillPositioning = ({ skills: initialSkills, windowSize }: UseSk
         "mongodb": { x: 200, y: -60 },
         "azure": { x: 250, y: 0 },
         "terraform": { x: 220, y: 30 },
-        
         "reactnative": { x: -200, y: -20 },
-        
         "linux": { x: -250, y: 0 },
         "react": { x: -150, y: 10 },
         "javascript": { x: 150, y: -40 },
