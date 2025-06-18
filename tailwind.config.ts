@@ -94,6 +94,53 @@ export default {
           "0%": { top: "0%", boxShadow: "0 0 10px 2px rgba(59, 130, 246, 0.7)" },
           "100%": { top: "100%", boxShadow: "0 0 10px 2px rgba(59, 130, 246, 0.7)" }
         },
+        "timeline-step-movement": {
+          "0%": { 
+            top: "0%", 
+            boxShadow: "0 0 10px 2px rgba(59, 130, 246, 0.7)",
+            transform: "translateX(-50%) scale(1)"
+          },
+          "20%": { 
+            top: "25%", 
+            boxShadow: "0 0 15px 3px rgba(59, 130, 246, 0.9)",
+            transform: "translateX(-50%) scale(1.2)"
+          },
+          "25%": { 
+            top: "25%", 
+            boxShadow: "0 0 15px 3px rgba(59, 130, 246, 0.9)",
+            transform: "translateX(-50%) scale(1.2)"
+          },
+          "45%": { 
+            top: "50%", 
+            boxShadow: "0 0 15px 3px rgba(59, 130, 246, 0.9)",
+            transform: "translateX(-50%) scale(1.2)"
+          },
+          "50%": { 
+            top: "50%", 
+            boxShadow: "0 0 15px 3px rgba(59, 130, 246, 0.9)",
+            transform: "translateX(-50%) scale(1.2)"
+          },
+          "70%": { 
+            top: "75%", 
+            boxShadow: "0 0 15px 3px rgba(59, 130, 246, 0.9)",
+            transform: "translateX(-50%) scale(1.2)"
+          },
+          "75%": { 
+            top: "75%", 
+            boxShadow: "0 0 15px 3px rgba(59, 130, 246, 0.9)",
+            transform: "translateX(-50%) scale(1.2)"
+          },
+          "95%": { 
+            top: "100%", 
+            boxShadow: "0 0 15px 3px rgba(59, 130, 246, 0.9)",
+            transform: "translateX(-50%) scale(1.2)"
+          },
+          "100%": { 
+            top: "100%", 
+            boxShadow: "0 0 10px 2px rgba(59, 130, 246, 0.7)",
+            transform: "translateX(-50%) scale(1)"
+          }
+        },
         "text-decode": {
           "0%": { filter: "blur(4px)", opacity: "0.3" },
           "100%": { filter: "blur(0)", opacity: "1" }
@@ -107,7 +154,8 @@ export default {
         "draw-line": "draw-line 1.5s ease-out forwards",
         pulse: "pulse 2s ease-in-out infinite",
         breathe: "breathe 3s ease-in-out infinite",
-        "timeline-light-movement": "timeline-light-movement 8s linear infinite", // Slowed from 4s to 8s
+        "timeline-light-movement": "timeline-light-movement 8s linear infinite",
+        "timeline-step-movement": "timeline-step-movement 12s ease-in-out infinite",
         "text-decode": "text-decode 0.5s ease-out forwards"
       },
       boxShadow: {
