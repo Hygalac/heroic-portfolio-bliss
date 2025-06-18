@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -21,6 +20,9 @@ export default {
     extend: {
       fontFamily: {
         sans: ['IBM Plex Sans', 'sans-serif'],
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
       },
       colors: {
         border: "hsl(var(--border))",
@@ -107,7 +109,7 @@ export default {
         "draw-line": "draw-line 1.5s ease-out forwards",
         pulse: "pulse 2s ease-in-out infinite",
         breathe: "breathe 3s ease-in-out infinite",
-        "timeline-light-movement": "timeline-light-movement 8s linear infinite", // Slowed from 4s to 8s
+        "timeline-light-movement": "timeline-light-movement 8s linear infinite",
         "text-decode": "text-decode 0.5s ease-out forwards"
       },
       boxShadow: {
