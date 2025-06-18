@@ -5,7 +5,6 @@ const AboutMe = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const timelineItems = useRef<(HTMLDivElement | null)[]>([]);
   const connectors = useRef<(HTMLDivElement | null)[]>([]);
-  const glowingDot = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -52,20 +51,8 @@ const AboutMe = () => {
       }
     });
 
-    // Animate the glowing dot to stop at each timeline point
-    const animateGlowingDot = () => {
-      if (glowingDot.current) {
-        glowingDot.current.style.animation = 'none';
-        glowingDot.current.style.animation = 'timeline-step-movement 12s ease-in-out infinite';
-      }
-    };
-
-    // Start the animation after a short delay
-    const timer = setTimeout(animateGlowingDot, 1000);
-
     return () => {
       observer.disconnect();
-      clearTimeout(timer);
     };
   }, []);
 
@@ -92,11 +79,7 @@ const AboutMe = () => {
           <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-blue-500/20"></div>
           
           {/* Moving light animation along timeline */}
-          <div 
-            ref={glowingDot}
-            className="absolute left-1/2 transform -translate-x-1/2 w-3 h-3 rounded-full bg-blue-500 z-20"
-            style={{ boxShadow: "0 0 10px 2px rgba(59, 130, 246, 0.7)" }}
-          ></div>
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-3 h-3 rounded-full bg-blue-500 z-20 animate-timeline-light-movement"></div>
           
           {/* Timeline Items */}
           
